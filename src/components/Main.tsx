@@ -1,34 +1,8 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { db } from "../data/data";
-import type { Guitar, GuitarCar } from "../types";
+import { useGuitarCart } from "../store/store";
 
-type MainProps = {
-  carrito: GuitarCar[],
-  setCarrito: Dispatch<SetStateAction<GuitarCar[]>>
-}
+export default function Main() {
 
-export default function Main({ carrito, setCarrito }: MainProps) {
-
-  const handleClick = (Guitarra: Guitar) => {
-    const guitarExist = carrito.some(item => item.id === Guitarra.id)
-
-    if (guitarExist) {
-      setCarrito(
-        carrito.map(
-          item => item.id === Guitarra.id ?
-            { ...item, quantity: item.quantity + 1 } :
-            item
-        )
-      )
-    } else {
-      const newGuitarCar: GuitarCar = { ...Guitarra, quantity: 1 }
-      setCarrito([...carrito, newGuitarCar])
-    }
-  }
-
-  useEffect(() => {
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-  }, [carrito])
+  const {db, addGuitar} = useGuitarCart()
 
   return (
     <main>
@@ -50,7 +24,7 @@ export default function Main({ carrito, setCarrito }: MainProps) {
                 <p className="text-4xl text-indigo-700 font-bold my-3 max-sm:text-3xl">${Guitarra.price}</p>
                 <button
                   className="cursor-pointer text-center text-md text-white font-medium p-2.5 rounded-md bg-amber-600 hover:bg-amber-500 uppercase w-full my-3"
-                  onClick={() => handleClick(Guitarra)}
+                  onClick={() => addGuitar(Guitarra)}
                 >
                   Agregar al Carrito
                 </button>

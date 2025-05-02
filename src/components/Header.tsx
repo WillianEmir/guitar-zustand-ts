@@ -1,43 +1,11 @@
 import { useMemo } from "react";
-import { Dispatch, SetStateAction } from "react";
-import type { Guitar, GuitarCar } from "../types";
+import { useGuitarCart } from "../store/store";
 
-type HeaderProps = {
-  carrito: GuitarCar[],
-  setCarrito: Dispatch<SetStateAction<GuitarCar[]>>
-}
+export default function Header() {
 
-export default function Header({ carrito, setCarrito }: HeaderProps) {
-
-  const carritoLength = useMemo(() => carrito.length > 0, [carrito])
-
-  const increaseQuantity = (id: Guitar['id']) => {
-    const newCarrito = carrito.map(
-      item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    )
-    setCarrito(newCarrito)
-  }
-
-  const decreaseQuantity = (id: Guitar['id']) => {
-    const newCarrito = carrito.map(
-      item => item.id === id ?
-        item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item :
-        item
-    )
-    setCarrito(newCarrito)
-  }
-
-  const deleteGuitar = (id: Guitar['id']) => {
-    setCarrito(carrito.filter(item => item.id !== id))
-  }
-
-  const vaciarCarrito = () => {
-    setCarrito([])
-  }
-
-  const guitarrasPriceTotal = useMemo(() => carrito.reduce(
-    (total, item) => total + (item.price * item.quantity), 0
-  ), [carrito])
+  const {cart, increaseQuantity, decreaseQuantity, deleteGuitar, vaciarCarrito} = useGuitarCart()
+  const carritoLength = useMemo(() => cart.length > 0, [cart])
+  const guitarrasPriceTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart])
 
   return (
     <header className="bg-[url(/img/header.jpg)] bg-no-repeat bg-cover bg-center">
@@ -67,7 +35,7 @@ export default function Header({ carrito, setCarrito }: HeaderProps) {
                   </thead>
 
                   <tbody>
-                    {carrito.map(guitarra => (
+                    {cart.map(guitarra => (
                       <tr
                         key={guitarra.id}
                         className="*:p-2 *:text-center *:border-b *:border-gray-300"

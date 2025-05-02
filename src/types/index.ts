@@ -1,11 +1,5 @@
-export type Guitar = {
-  id: number,
-  name: string,
-  image: string,
-  description: string,
-  price: number
-}
+import { z } from "zod"
+import { GuitarCarSchema, GuitarSchema } from "../schemas"
 
-export type GuitarCar = Guitar & {
-  quantity: number
-}
+export type Guitar = z.infer<typeof GuitarSchema>
+export type GuitarCar = z.infer<typeof GuitarCarSchema>
