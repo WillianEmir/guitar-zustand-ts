@@ -123,7 +123,7 @@ export default function Header({ carrito, setCarrito }: HeaderProps) {
                 </button>
               </>
             ) : (
-              <p className="text-center text-xl py-3 block w-90">El Carrito está vacio</p>
+              <p className="text-center text-xl py-3 block w-90">El Carrito ya no está vacio</p>
             )}
           </div>
         </nav>
