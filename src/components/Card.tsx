@@ -10,7 +10,7 @@ export default function Card({Guitarra} : CardProps) {
   const {addGuitar} = useGuitarCart()
 
   return (
-    <div key={Guitarra.id} className="bg-white flex p-2 rounded-md shadow w-75">
+    <div className="bg-white flex p-2 rounded-md shadow w-75">
       <div >
         <img className="max-w-auto" src={`/img/${Guitarra.image}.jpg`} alt={Guitarra.name} />
       </div>
