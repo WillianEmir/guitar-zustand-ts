@@ -1,35 +1,27 @@
 import { useGuitarCart } from "../store/store";
+import Card from "./Card";
 
 export default function Main() {
 
-  const {db, addGuitar} = useGuitarCart()
+  const { db } = useGuitarCart()
 
   return (
     <main>
       <section className="container mx-auto pb-3">
 
-        <h1 className="text-center text-6xl text-amber-600 font-bold py-10 max-sm:text-5xl">Las Mejores Guitarras</h1>
+        <div>
+          <h1 className="text-center text-6xl text-amber-600 font-bold py-10 max-sm:text-5xl">Las Mejores Guitarras</h1>
 
-        <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 max-sm:p-2 items-center gap-3">
+          <div>
+            
+          </div>
+        </div>
+
+
+        <div className="flex flex-wrap gap-3 justify-center">
 
           {db.map(Guitarra => (
-            <div key={Guitarra.id} className="bg-white flex p-2 rounded-md shadow">
-              <div >
-                <img className="max-w-35 max-sm:max-w-25" src={`/img/${Guitarra.image}.jpg`} alt={Guitarra.name} />
-              </div>
-
-              <div className="pr-5">
-                <h2 className="text-4xl my-2 font-medium max-sm:text-3xl">{Guitarra.name}</h2>
-                <p className="text-md">{Guitarra.description}</p>
-                <p className="text-4xl text-indigo-700 font-bold my-3 max-sm:text-3xl">${Guitarra.price}</p>
-                <button
-                  className="cursor-pointer text-center text-md text-white font-medium p-2.5 rounded-md bg-amber-600 hover:bg-amber-500 uppercase w-full my-3"
-                  onClick={() => addGuitar(Guitarra)}
-                >
-                  Agregar al Carrito
-                </button>
-              </div>
-            </div>
+            <Card Guitarra={Guitarra} />
           ))}
 
         </div>

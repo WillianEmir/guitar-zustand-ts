@@ -19,7 +19,7 @@ export default function Header() {
             <img className="max-w-10" src="/img/carrito.png" alt="carrito" />
           </div>
 
-          <div className="hidden group-hover:block absolute right-0 max-sm:-right-38 bg-white rounded-md shadow p-2.5 max-h-125 overflow-auto">
+          <div className="hidden group-hover:block absolute right-0 max-sm:-right-38 bg-white rounded-md shadow p-2.5 max-h-125 overflow-auto transition-all">
 
             {carritoLength ? (
               <>
@@ -42,7 +42,7 @@ export default function Header() {
                       >
                         <td>
                           <img
-                            className="max-w-15 hover:scale-105 transition delay-150 duration-150 ease-in-out"
+                            className="max-w-10"
                             src={`/img/${guitarra.image}.jpg`}
                             alt={guitarra.name}
                           />
@@ -51,7 +51,7 @@ export default function Header() {
                         <td>${guitarra.price}</td>
                         <td>
                           <button
-                            className="bg-neutral-600 hover:bg-neutral-700 size-8 mb-3 rounded-full font-bold text-md cursor-pointer text-white"
+                            className="bg-[var(--primary)] size-7 mb-3 rounded-full font-semibold text-md cursor-pointer text-white"
                             onClick={() => increaseQuantity(guitarra.id)}
                           >
                             +
@@ -62,7 +62,7 @@ export default function Header() {
                           </span>
 
                           <button
-                            className="bg-neutral-600 hover:bg-neutral-700 size-8 mt-3 rounded-full font-bold text-md cursor-pointer text-white"
+                            className="bg-[var(--primary)] size-7 mt-3 rounded-full font-bold text-md cursor-pointer text-white"
                             onClick={() => decreaseQuantity(guitarra.id)}
                           >
                             -
@@ -70,7 +70,7 @@ export default function Header() {
                         </td>
                         <td>
                           <button
-                            className="cursor-pointer size-8 rounded-full bg-red-500 text-md font-bold text-white"
+                            className="cursor-pointer size-7 rounded-full bg-red-500 text-md font-bold text-white"
                             onClick={() => deleteGuitar(guitarra.id)}
                           >
                             X
@@ -81,7 +81,10 @@ export default function Header() {
                   </tbody>
                 </table>
 
-                <span className="text-center text-xl py-3 block">Total a pagar ${guitarrasPriceTotal}</span>
+                <p className="text-center text-xl py-3 block">
+                  Total a pagar {''}
+                  <span className="font-bold">${guitarrasPriceTotal}</span>
+                </p>
 
                 <button
                   className="cursor-pointer text-center text-md text-white font-medium p-2.5 rounded-md bg-neutral-600 hover:bg-neutral-700 uppercase w-full my-3"
@@ -91,7 +94,7 @@ export default function Header() {
                 </button>
               </>
             ) : (
-              <p className="text-center text-xl py-3 block w-90">El Carrito ya no está vacio</p>
+              <p className="text-center text-xl py-3 block w-90">El Carrito está vacio</p>
             )}
           </div>
         </nav>
